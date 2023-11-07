@@ -1,0 +1,318 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Hotel Fiesta</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/UTB.Eshop.Web.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+    <body>
+    <section class="header">
+        <div class="flex">
+            <a href="#home" class="logo">Hotel Fiesta</a>
+            <a href="#availability" class="btn">Ověřit dostupnost</a>
+            <div id="menu-btn" class="fas fa-bars"></div>
+        </div>
+        <nav class="navbar">
+            <a href="#home">Domů</a>
+            <a href="#about">O nás</a>
+            <a href="#reservation">Rezervace ubytování</a>
+            <a href="#gallery">Fotogalerie</a>
+            <a href="#contact">Kontakt</a>
+            <a href="#reviews">Recenze</a>
+        </nav>
+    </section>
+
+    <section class="home" id="home">
+        <div class="swiper home-slider">
+            <div class="swiper-wrapper">
+                <div class="box swiper-slide">
+                    <img src="/img/products/dbl_vecer_1446121617_1024x768_ff_80.jpg" alt="">
+                    <div class="flex">
+                        <h3>Luxusní Pokoje</h3>
+                        <a href="#availability" class="btn">Ověřit dostupnost</a>
+                    </div>
+                </div>
+                <div class="box swiper-slide">
+                    <img src="/img/products/266056561.jpg" alt="">
+                    <div class="flex">
+                        <h3>Jídlo a nápoje</h3>
+                        <a href="#reservation" class="btn">Vytvořit rezervaci</a>
+                    </div>
+                </div>
+                <div class="box swiper-slide">
+                    <img src="/img/products/luxury-hotel-lobby.webp" alt="">
+                    <div class="flex">
+                        <h3>Luxusní sály</h3>
+                        <a href="#contact" class="btn">Kontaktujte nás</a>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </section>
+
+
+    <section class="availability" id="availability">
+        <form action="" method="post">
+            <div class="flex">
+                <div class="box">
+                    <p>Check in</p>
+                    <input type="date" name="check_in" class="input" required>
+                </div>
+                <div class="box">
+                    <p>Check out</p>
+                    <input type="date" name="check_out" class="input" required>
+                </div>
+                <div class="box">
+                    <p>Dospělí</p>
+                    <select name="adults" class="input" required>
+                        <option value="1">1 dospělý</option>
+                        <option value="2">2 dospělí</option>
+                        <option value="3">3 dospělí</option>
+                        <option value="4">4 dospělí</option>
+                        <option value="5">5 dospělích</option>
+                        <option value="6">6 dospělích</option>
+                    </select>
+                </div>
+                <div class="box">
+                    <p>Děti</p>
+                    <select name="childs" class="input" required>
+                        <option value="-">žádné</option>
+                        <option value="1">1 dítě</option>
+                        <option value="2">2 děti</option>
+                        <option value="3">3 děti</option>
+                        <option value="4">4 děti</option>
+                        <option value="5">5 dětí</option>
+                        <option value="6">6 dětí</option>
+                    </select>
+                </div>
+                <div class="box">
+                    <p>Pokoje</p>
+                    <select name="Rooms" class="input" required>
+                        <option value="1">1 pokoj</option>
+                        <option value="2">2 pokoje</option>
+                        <option value="3">3 pokoje</option>
+                        <option value="4">4 pokoje</option>
+                        <option value="5">5 pokojů</option>
+                        <option value="6">6 pokojů</option>
+                    </select>
+                </div>
+            </div>
+            <input type="submit" value="Ověřit dostupnost" name="check" class="btn">
+        </form>
+    </section>
+
+    <section class="about" id="about">
+        <div class="row">
+            <div class="image">
+                <img src="/img/products/360_F_309920918_QLJhePSj1Ny4T2vGnB4kF8VZOZHapee5.jpg" alt="">
+            </div>
+            <div class="content">
+                <h3>Nejlepší personál</h3>
+                <p>O Vaše požadavky se postará náš nejlepší personál.</p>
+                <a href="#reservation" class="btn">Vytvořit rezervaci</a>
+            </div>
+        </div>
+        <div class="row revers">
+            <div class="image">
+                <img src="/img/products/000031-000447.jpg" alt="">
+            </div>
+            <div class="content">
+                <h3>Nejlepší catering</h3>
+                <p>O Vaše chuťové buňky se postarají naši kuchaři a naše skvěle vybavená restaurace.</p>
+                <a href="#contact" class="btn">Kontaktujte nás</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="image">
+                <img src="/img/products/324.jpg" alt="">
+            </div>
+            <div class="content">
+                <h3>Bazén</h3>
+                <p>Můžete také využít služeb našeho wellness včetně krytého bazénu.</p>
+                <a href="#availability" class="btn">Ověřit dostupnost</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="box-container">
+            <div class="box">
+                <img src="/img/products/icon-1.png" alt="">
+                <h3>Jídlo a pití</h3>
+                <p>Jídlo a pití 3x denně včetně dvou svačin po celou dobu Vašeho pobytu.</p>
+            </div>
+            <div class="box">
+                <img src="/img/products/icon-2.png" alt="">
+                <h3>Venkovní stolování</h3>
+                <p>Možnost stravování na naší terase.</p>
+            </div>
+            <div class="box">
+                <img src="/img/products/icon-3.png" alt="">
+                <h3>Výhled do okolí</h3>
+                <p>V okolí můžete vidět krásnou přírodu a v klidu při pohledu na ni relaxovat.</p>
+            </div>
+            <div class="box">
+                <img src="/img/products/icon-4.png" alt="">
+                <h3>Dekorace</h3>
+                <p>Náš hotel je vystaven v moderní architektuře a určitě se bude líbit každému z Vás.</p>
+            </div>
+            <div class="box">
+                <img src="/img/products/icon-5.png" alt="">
+                <h3>Sauna a vířivka</h3>
+                <p>V našem wellness můžete také vyzkoušet naši finskou saunu a teple vyhřátou vířivku.</p>
+            </div>
+            <div class="box">
+                <img src="/img/products/icon-6.png" alt="">
+                <h3>Sportovní zázemí</h3>
+                <p>V našem hotelu také najdete kurty na tenis, badminton a bowlingovou dráhu.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="reservation" id="reservation">
+        <form action="" method="post">
+            <h3>Vytvořit rezervaci</h3>
+            <div class="flex">
+                <div class="box">
+                    <p>Check in <span>*</span></p>
+                    <input type="date" name="check_in" class="input" required>
+                </div>
+                <div class="box">
+                    <p>Check out <span>*</span></p>
+                    <input type="date" name="check_out" class="input" required>
+                </div>
+                <div class="box">
+                    <p>Dospělí <span>*</span></p>
+                    <select name="adults" class="input" required>
+                        <option value="1">1 dospělý</option>
+                        <option value="2">2 dospělí</option>
+                        <option value="3">3 dospělí</option>
+                        <option value="4">4 dospělí</option>
+                        <option value="5">5 dospělích</option>
+                        <option value="6">6 dospělích</option>
+                    </select>
+                </div>
+                <div class="box">
+                    <p>Děti <span>*</span></p>
+                    <select name="childs" class="input" required>
+                        <option value="-">žádné</option>
+                        <option value="1">1 dítě</option>
+                        <option value="2">2 děti</option>
+                        <option value="3">3 děti</option>
+                        <option value="4">4 děti</option>
+                        <option value="5">5 dětí</option>
+                        <option value="6">6 dětí</option>
+                    </select>
+                </div>
+                <div class="box">
+                    <p>Pokoje <span>*</span></p>
+                    <select name="rooms" class="input" required>
+                        <option value="1">1 pokoj</option>
+                        <option value="2">2 pokoje</option>
+                        <option value="3">3 pokoje</option>
+                        <option value="4">4 pokoje</option>
+                        <option value="5">5 pokojů</option>
+                        <option value="6">6 pokojů</option>
+                    </select>
+                </div>
+            </div>
+            <input type="submit" value="Ověřit dostupnost" name="check" class="btn">
+        </form>
+    </section>
+
+    <section class="gallery" id="gallery">
+        <div class="swiper gallery-slider">
+            <div class="swiper-wrapper">
+                <img src="/img/products/ef4c7e22-2b75-40e4-8a06-b08ce0bf2524.jpg" class="swiper-slide" alt="">
+                <img src="/img/products/02_07_0014.jpg" class="swiper-slide" alt="">
+                <img src="/img/products/TOO_restaurant_Panoramique_vue_Paris_nuit_v2-scaled.jpg" class="swiper-slide" alt="">
+                <img src="/img/products/gallery-img.webp" class="swiper-slide" alt="">
+                <img src="/img/products/bowling-e1644056697551.jpg" class="swiper-slide" alt="">
+                <img src="/img/products/EFI_SPA_Wellness.jpg" class="swiper-slide" alt="">
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="row">
+            <form action="" method="post">
+                <h3>Pošlete nám zprávu</h3>
+                <input type="text" name="name" placeholder="vložte své jméno" class="box">
+                <input type="email" name="email" placeholder="vložte svůj e-mail" class="box">
+                <input type="number" name="number" placeholder="vložte své telefonní číslo" class="box">
+                <textarea name="msg" class="box" placeholder="vložte svou poznámku"></textarea>
+                <input type="submit" value="odeslat" name="send" class="btn">
+            </form>
+            <div class="faq">
+                <h3 class="title">Často kladené otázky</h3>
+                <div class="box active">
+                    <h3>Jak zrušit rezervaci?</h3>
+                    <p>Rezervaci možno zrušit bez kauce 48 hod před začátkem pobytu v našem online rezervačním systému.</p>
+                </div>
+                <div class="box">
+                    <h3>Možnosti parkování?</h3>
+                    <p>Náš hotelový komplex nabízí 100 parkovacích míst.</p>
+                </div>
+                <div class="box">
+                    <h3>Jak můžu zaplatit za ubytování?</h3>
+                    <p>Kartou online či hotově na místě v den zahájení pobytu.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="reviews" id="reviews">
+        <div class="swiper reviews-slider">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide box">
+                    <img src="/img/products/pic1.png" alt="">
+                    <h3>Petr Novosad</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates blanditiis optio dignissimos eaque aliquid explicabo.</p>
+                </div>
+                <div class="swiper-slide box">
+                    <img src="/img/products/pic2.png" alt="">
+                    <h3>Lukáška Opravilová</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates blanditiis optio dignissimos eaque aliquid explicabo.</p>
+                </div>
+                <div class="swiper-slide box">
+                    <img src="/img/products/pic3.png" alt="">
+                    <h3>Ondřej Knýgr</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates blanditiis optio dignissimos eaque aliquid explicabo.</p>
+                </div>
+                <div class="swiper-slide box">
+                    <img src="/img/products/pic4.png" alt="">
+                    <h3>Ambatu Nová</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates blanditiis optio dignissimos eaque aliquid explicabo.</p>
+                </div>
+                <div class="swiper-slide box">
+                    <img src="/img/products/pic5.png" alt="">
+                    <h3>Kam Novotný</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates blanditiis optio dignissimos eaque aliquid explicabo.</p>
+                </div>
+                <div class="swiper-slide box">
+                    <img src="/img/products/pic6.png" alt="">
+                    <h3>Jiří Kolení</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates blanditiis optio dignissimos eaque aliquid explicabo.</p>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
