@@ -1,0 +1,69 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head runat="server">
+   	<script type="text/javascript" src="@Url.Content("~/Scripts/jquery-3.2.1.min.js")"></script>
+    <link href="@Url.Content("~/Media/layout.css")" rel="stylesheet" type="text/css" />
+   	<style>
+   	p, body, td { font-family: Tahoma, Arial, Sans-Serif; font-size: 10pt; }
+   	</style>
+    <title></title>
+</head>
+<body style="padding:10px">
+    <form id="f" method="post" action="@Url.Action("Create")">
+    
+        <h1>Vytvoření rezervace</h1>    
+    
+        <div class="space">
+            <div>Jméno a příjmení</div>
+            <div>@Html.TextBox("Text")</div>
+        </div>
+        
+        <div class="space">
+            <div>Začátek pobytu</div>
+            <div>@Html.TextBox("Start")</div>
+        </div>
+
+        <div class="space">
+            <div>Konec pobytu</div>
+            <div>@Html.TextBox("End")</div>
+        </div>
+
+        <div class="space">
+            <div>Číslo pokoje</div>
+            <div>@Html.DropDownList("Resource")</div>
+        </div>
+
+        <div class="space">
+            <input type="submit" value="Uložit" id="ButtonSave" />
+            <a href="javascript:close()">Zavřít</a>
+        </div>
+
+        <div class="space">&nbsp;</div>
+
+</form>
+    
+    <script type="text/javascript">
+        function close(result) {
+            if (parent && parent.DayPilot && parent.DayPilot.ModalStatic) {
+                parent.DayPilot.ModalStatic.close(result);
+            }
+        }
+
+        $("#f").submit(function () {
+            var f = $("#f");
+            $.post(f.action, f.serialize(), function (result) {
+                close(eval(result));
+            });
+            return false;
+        });
+
+        $(document).ready(function () {
+            $("#Text").focus();
+        });
+    
+    </script>    
+</body>
+</html>

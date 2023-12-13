@@ -1,0 +1,78 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE>
+<html>
+<head runat="server">
+   	<script type="text/javascript" src="@Url.Content("~/Scripts/jquery-3.2.1.min.js")"></script>
+    
+    <link href="@Url.Content("~/Media/layout.css")" rel="stylesheet" type="text/css" />
+   	<style>
+   	p, body, td { font-family: Tahoma, Arial, Sans-Serif; font-size: 10pt; }
+   	</style>
+    <title></title>
+</head>
+<body style="padding:10px">
+    <form id="f" method="post" action="@Url.Action("Edit")">
+        <h2>Upravit rezervaci</h2>
+
+        <div style="margin-top:20px">
+            <div>Jméno a příjmení</div>
+            @Html.TextBox("Text") @Html.Hidden("Id")
+        </div>
+        
+        <div class="space">
+            <div>Začátek pobytu</div>
+            <div>@Html.TextBox("Start")</div>
+        </div>
+
+        <div class="space">
+            <div>Konec pobytu</div>
+            <div>@Html.TextBox("End")</div>
+        </div>
+
+        <div class="space">
+            <div>Číslo pokoje</div>
+            <div>@Html.DropDownList("Resource")</div>
+        </div>
+
+        <div class="space">
+            <div>Zaplaceno</div>
+            <div>@Html.DropDownList("Paid")</div>
+        </div>
+        
+        <div class="space">
+            <div>Stav</div>
+            <div>@Html.DropDownList("Status")</div>
+        </div>
+
+        <div style="margin-top:20px">
+            <input type="submit" id="ButtonSave" value="Uložit" />
+            <a href="javascript:close()">Zavřít</a>
+        </div>
+    
+    </form>
+    
+    <script type="text/javascript">
+        function close(result) {
+            if (parent && parent.DayPilot && parent.DayPilot.ModalStatic) {
+                parent.DayPilot.ModalStatic.close(result);
+            }
+        }
+
+        $("#f").submit(function () {
+            var f = $("#f");
+            $.post(f.action, f.serialize(), function (result) {
+                close(eval(result));
+            });
+            return false;
+        });
+
+        $(document).ready(function () {
+            $("#Name").focus();
+        });
+    
+    </script>
+    
+</body>
+</html>

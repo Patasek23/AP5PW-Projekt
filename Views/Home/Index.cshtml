@@ -1,0 +1,124 @@
+﻿@using System.ServiceModel
+@using DayPilot.Web.Mvc;
+@using DayPilot.Web.Mvc.Enums
+@using DayPilot.Web.Mvc.Events.Scheduler
+
+@{
+    ViewBag.Title = "Rezervační systém hotelu";
+}
+
+<style type="text/css">
+
+    .scheduler_default_rowheader_inner {
+        border-right: 1px solid #ccc;
+    }
+
+    .scheduler_default_rowheadercol2 {
+        background: White;
+    }
+
+    .scheduler_default_rowheadercol2 .scheduler_default_rowheader_inner {
+        top: 2px;
+        bottom: 2px;
+        left: 2px;
+        background-color: transparent;
+        border-left: 5px solid #1a9d13; /* green */
+        border-right: 0px none;
+    }
+
+    .status_dirty.scheduler_default_rowheadercol2 .scheduler_default_rowheader_inner {
+        border-left: 5px solid #ea3624; /* red */
+    }
+
+    .status_cleanup.scheduler_default_rowheadercol2 .scheduler_default_rowheader_inner {
+        border-left: 5px solid #f9ba25; /* orange */
+    }
+</style>
+
+<div style="margin-bottom: 20px;">    
+    Ukaž pokoje:
+    @Html.DropDownList("Filter", new SelectListItem[]
+        { 
+            new SelectListItem() { Text = "Všechny", Value = "0" },
+            new SelectListItem() { Text = "Jednolůžkový", Value = "1" },
+            new SelectListItem() { Text = "Dvoulůžkový", Value = "2" },
+            new SelectListItem() { Text = "Třílůžkový", Value = "3" },
+            new SelectListItem() { Text = "Rodinný", Value = "4" },
+        },
+        new { @onchange = "filter('room', this.value)" }
+    )
+</div>
+
+@Html.DayPilotScheduler("dp", new DayPilotSchedulerConfig
+{
+    BackendUrl = Url.Action("Backend", "Scheduler"),
+    Scale = TimeScale.Manual,
+    
+    EventHeight = 80,
+    
+    TimeRangeSelectedHandling = TimeRangeSelectedHandlingType.JavaScript,
+    TimeRangeSelectedJavaScript = "create(start, end, resource);",
+    TimeRangeSelectingJavaScript = "selecting(args)",
+    
+    EventClickHandling = EventClickHandlingType.JavaScript,
+    EventClickJavaScript = "edit(e);",
+    
+    EventMoveHandling = EventMoveHandlingType.CallBack,
+    EventResizeHandling = EventResizeHandlingType.CallBack,
+    
+    TimeHeaders = new TimeHeaderCollection()
+    {
+        new TimeHeader(GroupBy.Month),
+        new TimeHeader(GroupBy.Day)
+    },
+
+    HeaderColumns = new RowHeaderColumnCollection()
+    {
+        new RowHeaderColumn("Pokoj", 80),
+        new RowHeaderColumn("Počet lůžek", 80),
+        new RowHeaderColumn("Stav", 80)
+    }
+})
+
+<script>
+    function modal() {
+        var m = new DayPilot.Modal();
+        m.closed = function () {
+            dp.clearSelection();
+            var data = this.result;
+            if (data == "OK") {
+                dp.commandCallBack("refresh");
+            }
+
+        };
+        return m;
+    }
+
+    function create(start, end, resource) {
+        modal().showUrl('@Url.Action("Create", "Reservation")?start=' + start + "&end=" + end + "&resource=" + resource);
+    }
+    function edit(e) {
+        modal().showUrl('@Url.Action("Edit", "Reservation")?id=' + e.id());
+    }
+
+    function filter(property, value) {
+        if (!dp.clientState.filter) {
+            dp.clientState.filter = {};
+        }
+        if (dp.clientState.filter[property] != value) { 
+            dp.clientState.filter[property] = value;
+            dp.commandCallBack('filter');
+        }
+    }
+
+    function selecting(args) {
+        var duration = Math.floor(new DayPilot.Duration(args.end.getTime() - args.start.getTime()).totalDays());
+        var s = duration > 1 ? "s" : "";
+
+        args.left.enabled = true;
+        args.left.html = "Začátek:<br/>" + args.start.toString("d/M/yyyy");
+        args.right.enabled = true;
+        args.right.html = "Konec:<br/>" + args.end.toString("d/M/yyyy") + "<br/>" + duration + " noc" + s;
+    }
+
+</script>
